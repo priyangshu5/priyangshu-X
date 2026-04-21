@@ -9,7 +9,7 @@
 const OPENROUTER_API_KEY = "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";
 
 // 🤖 Model and personality
-const MODEL_NAME = "qwen/qwen-2.5-7b-instruct";
+const MODEL_NAME = "openai/gpt-oss-120b:free";
 const SYSTEM_PROMPT = `You are Priyangshu AI, a friendly, smart, professional, and helpful assistant created by Priyangshu. 
 Your name is Priyangshu AI. Always introduce yourself as Priyangshu AI when asked who you are.
 You have the ability to search the web for real-time information. When you need current data, facts, or news, you can request a search by using the special command: [SEARCH: your search query].
@@ -207,8 +207,8 @@ async function processUserMessage(userMessage) {
         const payload = {
             model: MODEL_NAME,
             messages: conversationHistory,
-            temperature: 0.7,
-            max_tokens: 150,
+            temperature: 1,
+            max_tokens:  12000,
             reasoning: { enabled: true }
         };
         
