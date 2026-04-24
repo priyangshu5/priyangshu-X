@@ -3,39 +3,473 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Priyangshu AI</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="PRIYANGSHUX8 - Elite Personal Realm. This is not a website. This is a world.">
+    <meta name="theme-color" content="#0a0000">
+    <title>PRIYANGSHUX8 | Elite Realm</title>
+
+    <!-- ============ STYLESHEETS ============ -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/hero.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <!-- ============ FONTS ============ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ============ FAVICON ============ -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
 </head>
 <body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <div class="header-content">
-                <div class="avatar">👺</div>
-                <div>
-                    <h1>Priyangshu AI</h1>
-                    <p class="status">Online • Ready to help</p>
-                </div>
-            </div>
-        </div>
 
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot-message">
-                <div class="message-content">
-                    Hello! I'm Priyangshu AI. Ask me anything!
-                </div>
-            </div>
-        </div>
-
-        <div class="chat-input-container">
-            <input type="text" id="userInput" placeholder="Type your message..." autocomplete="off">
-            <button id="sendButton">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                </svg>
+    <!-- ==================== INTRO SCREEN ==================== -->
+    <div id="intro-screen" class="intro-screen">
+        <canvas id="intro-particles-canvas"></canvas>
+        <div class="intro-content">
+            <div class="intro-glow-line top"></div>
+            <h1 class="intro-title" id="intro-title"></h1>
+            <p class="intro-subtitle">Enter the realm</p>
+            <div class="intro-glow-line bottom"></div>
+            <!-- ENTER BUTTON (appears after animation) -->
+            <button id="intro-enter-btn" class="intro-enter-btn hidden">
+                <span>Enter the Realm</span>
+                <span class="btn-glow-effect"></span>
             </button>
+        </div>
+        <div class="intro-loading-bar-container">
+            <div class="intro-loading-bar" id="intro-loading-bar"></div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ==================== MAIN APPLICATION ==================== -->
+    <div id="app" class="app-hidden">
+
+        <!-- ========== CUSTOM CURSOR ========== -->
+        <div id="custom-cursor" class="custom-cursor">
+            <div class="cursor-dot"></div>
+            <div class="cursor-ring"></div>
+        </div>
+
+        <!-- ========== TOP NAVIGATION ========== -->
+        <nav id="navbar" class="navbar">
+            <div class="nav-brand">
+                <a href="#home" class="nav-logo-link">
+                    <span class="nav-logo-text">PRIYANGSHUX8</span>
+                </a>
+                <span class="nav-logo-glow"></span>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
+                <li><a href="#ai-zone" class="nav-link" data-section="ai-zone">AI Zone</a></li>
+                <li><a href="#games" class="nav-link" data-section="games">Games</a></li>
+                <li><a href="#quiz" class="nav-link" data-section="quiz">Quiz</a></li>
+                <li><a href="#music" class="nav-link" data-section="music">Mood</a></li>
+                <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+                <li><a href="#secret" class="nav-link secret-nav-link" data-section="secret" title="Hidden Zone">🔴</a></li>
+                <li><a href="#settings" class="nav-link" data-section="settings" title="Settings">⚙</a></li>
+            </ul>
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+
+        <!-- ========== MOBILE NAVIGATION OVERLAY ========== -->
+        <div id="mobile-nav" class="mobile-nav">
+            <div class="mobile-nav-bg"></div>
+            <ul class="mobile-nav-links">
+                <li><a href="#home" class="mobile-nav-link" data-section="home">🏠 Home</a></li>
+                <li><a href="#ai-zone" class="mobile-nav-link" data-section="ai-zone">🤖 AI Zone</a></li>
+                <li><a href="#games" class="mobile-nav-link" data-section="games">🎮 Games</a></li>
+                <li><a href="#quiz" class="mobile-nav-link" data-section="quiz">❓ Quiz</a></li>
+                <li><a href="#music" class="mobile-nav-link" data-section="music">🎵 Mood</a></li>
+                <li><a href="#about" class="mobile-nav-link" data-section="about">⚡ About</a></li>
+                <li><a href="#secret" class="mobile-nav-link secret-mobile-link" data-section="secret">🔴 Secret Zone</a></li>
+                <li><a href="#settings" class="mobile-nav-link" data-section="settings">⚙ Settings</a></li>
+            </ul>
+        </div>
+
+        <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+        <main id="main-content" class="main-content">
+
+            <!-- ========== HOME / HERO SECTION ========== -->
+            <section id="home" class="section hero-section active-section">
+                <canvas id="hero-particles-canvas" class="hero-particles-canvas"></canvas>
+                <div class="hero-container">
+                    <div class="hero-image-col">
+                        <div class="hero-image-wrapper">
+                            <div class="hero-image-glow-ring"></div>
+                            <div class="hero-image-aura"></div>
+                            <div class="hero-image-smoke"></div>
+                            <div class="hero-image-smoke secondary"></div>
+                            <img
+                            src="assets/images/649242457_17850445116688554_1811409149503448486_n.jpg"
+                            alt="PRIYANGSHUX8 - White haired anime character with red glowing eyes"
+                            class="hero-image"
+                            id="hero-image"
+                            loading="eager"
+                            >
+                            <div class="hero-image-border-pulse"></div>
+                            <div class="hero-eye-glow-left"></div>
+                            <div class="hero-eye-glow-right"></div>
+                        </div>
+                    </div>
+                    <div class="hero-text-col">
+                        <h2 class="hero-heading">
+                            <span class="hero-heading-letter">P</span><span class="hero-heading-letter">R</span><span class="hero-heading-letter">I</span><span class="hero-heading-letter">Y</span><span class="hero-heading-letter">A</span><span class="hero-heading-letter">N</span><span class="hero-heading-letter">G</span><span class="hero-heading-letter">S</span><span class="hero-heading-letter">H</span><span class="hero-heading-letter">U</span><span class="hero-heading-letter">X</span><span class="hero-heading-letter">8</span>
+                        </h2>
+                        <p class="hero-tagline">Elite • Mysterious • Unbound</p>
+                        <p class="hero-description">
+                            A realm where darkness meets elegance. Where red glows in the abyss
+                            and confidence burns eternal. This is not just a presence — it is a force.
+                        </p>
+                        <div class="hero-cta-group">
+                            <button class="btn-primary btn-lg" onclick="navigateToSection('ai-zone')">
+                                <span>Enter AI Zone</span>
+                                <span class="btn-glow-effect"></span>
+                            </button>
+                            <button class="btn-secondary btn-lg" onclick="navigateToSection('music')">
+                                <span>Explore Mood</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-scroll-indicator">
+                    <span>Discover More</span>
+                    <div class="scroll-arrow"></div>
+                </div>
+            </section>
+
+            <!-- ========== AI CHATBOT ZONE ========== -->
+            <section id="ai-zone" class="section ai-section">
+                <div class="section-header">
+                    <h2 class="section-title">🤖 AI Chatbot Zone</h2>
+                    <p class="section-subtitle">Artificial intelligence at your command</p>
+                </div>
+                <div class="ai-chat-container">
+                    <div class="ai-chat-sidebar">
+                        <div class="ai-status-card">
+                            <div class="ai-status-indicator">
+                                <span class="ai-status-dot" id="ai-status-dot"></span>
+                                <span id="ai-status-text">AI Ready</span>
+                            </div>
+                            <p class="ai-model-info">Model: GPT-OSS 120B (Free)</p>
+                        </div>
+                        <button class="btn-outline btn-sm ai-clear-btn" id="ai-clear-chat">
+                            🗑 Clear Chat
+                        </button>
+                    </div>
+                    <div class="ai-chat-main">
+                        <div class="ai-messages" id="ai-messages">
+                            <div class="ai-message bot">
+                                <div class="ai-avatar">AI</div>
+                                <div class="ai-bubble">
+                                    <p>Welcome to <strong>PRIYANGSHUX8 AI Zone</strong>.</p>
+                                    <p>I am PriyangshuX8, your intelligent assistant — chill, sharp, and ready. Let's vibe. 🔥</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-typing-indicator hidden" id="ai-typing-indicator">
+                            <span></span><span></span><span></span>
+                        </div>
+                        <div class="ai-input-area">
+                            <input
+                            type="text"
+                            id="ai-user-input"
+                            class="ai-input"
+                            placeholder="Type your message here..."
+                            autocomplete="off"
+                            >
+                            <button id="ai-send-btn" class="ai-send-btn" title="Send message">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 2L11 13"/>
+                                    <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== GAME ZONE ========== -->
+            <section id="games" class="section games-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎮 Game Zone</h2>
+                    <p class="section-subtitle">Elite mini-games with style</p>
+                </div>
+                <div class="games-grid">
+                    <!-- Memory Match Card -->
+                    <div class="game-card" id="game-card-memory">
+                        <div class="game-card-header">
+                            <h3>🧠 Memory Match</h3>
+                            <span class="game-badge">8 Pairs</span>
+                        </div>
+                        <div class="memory-grid" id="memory-grid"></div>
+                        <div class="game-stats">
+                            <span>Moves: <strong id="memory-moves">0</strong></span>
+                            <span>Found: <strong id="memory-pairs">0</strong>/8</span>
+                        </div>
+                        <button class="btn-primary btn-sm" onclick="resetMemoryGame()">🔄 Restart</button>
+                    </div>
+
+                    <!-- Tic Tac Toe Card -->
+                    <div class="game-card" id="game-card-tictactoe">
+                        <div class="game-card-header">
+                            <h3>❌ Tic Tac Toe ⭕</h3>
+                            <span class="game-badge">PvP</span>
+                        </div>
+                        <div class="tictactoe-grid" id="tictactoe-grid"></div>
+                        <p id="tictactoe-status" class="game-status-text">Your turn — <strong>X</strong></p>
+                        <button class="btn-primary btn-sm" onclick="resetTicTacToe()">🔄 Restart</button>
+                    </div>
+
+                    <!-- Reflex Tap Card -->
+                    <div class="game-card" id="game-card-reflex">
+                        <div class="game-card-header">
+                            <h3>⚡ Reflex Tap</h3>
+                            <span class="game-badge">Speed</span>
+                        </div>
+                        <div class="reflex-arena" id="reflex-arena">
+                            <p id="reflex-prompt">Click anywhere to begin</p>
+                            <div id="reflex-target" class="reflex-target hidden"></div>
+                        </div>
+                        <div class="game-stats">
+                            <span>Score: <strong id="reflex-score">0</strong></span>
+                            <span>Best: <strong id="reflex-best">0</strong></span>
+                        </div>
+                        <button class="btn-primary btn-sm" id="reflex-start-btn" onclick="startReflexRound()">▶ Start Round</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== QUIZ ZONE ========== -->
+            <section id="quiz" class="section quiz-section">
+                <div class="section-header">
+                    <h2 class="section-title">❓ Quiz Zone</h2>
+                    <p class="section-subtitle">Challenge your mind</p>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-category-select">
+                        <button class="quiz-cat-btn active" data-cat="general">🌍 General</button>
+                        <button class="quiz-cat-btn" data-cat="anime">🎌 Anime</button>
+                        <button class="quiz-cat-btn" data-cat="growth">🌱 Growth</button>
+                    </div>
+                    <div class="quiz-card" id="quiz-card">
+                        <p class="quiz-question" id="quiz-question">Select a category to begin</p>
+                        <div class="quiz-options" id="quiz-options"></div>
+                        <p class="quiz-feedback" id="quiz-feedback"></p>
+                        <div class="quiz-progress-bar">
+                            <span id="quiz-score-display">Score: 0</span>
+                            <span id="quiz-progress-display">Question 0/10</span>
+                        </div>
+                        <div class="quiz-buttons">
+                            <button class="btn-primary btn-sm" id="quiz-next-btn" style="display:none;" onclick="nextQuizQuestion()">Next →</button>
+                            <button class="btn-outline btn-sm" onclick="resetQuiz()">🔄 Restart</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== MOOD / MUSIC ZONE ========== -->
+            <section id="music" class="section music-section">
+                <div class="section-header">
+                    <h2 class="section-title">🎵 Mood Zone</h2>
+                    <p class="section-subtitle">Curate your sonic atmosphere</p>
+                </div>
+                <div class="music-player-container">
+                    <div class="music-visualizer-panel">
+                        <canvas id="visualizer-canvas" class="visualizer-canvas"></canvas>
+                        <div class="music-now-playing">
+                            <h3 id="current-track-title">No Track Selected</h3>
+                            <p id="current-track-mood">Select from the playlist below</p>
+                        </div>
+                    </div>
+                    <div class="music-controls-panel">
+                        <div class="music-buttons-row">
+                            <button id="music-prev-btn" class="music-ctrl-btn" title="Previous Track">⏮</button>
+                            <button id="music-play-btn" class="music-play-btn" title="Play / Pause">
+                                <span id="play-icon">▶</span>
+                            </button>
+                            <button id="music-next-btn" class="music-ctrl-btn" title="Next Track">⏭</button>
+                        </div>
+                        <div class="music-progress-row">
+                            <span id="music-current-time">0:00</span>
+                            <input type="range" id="music-progress-slider" class="music-slider" value="0" min="0" max="100" step="0.1">
+                            <span id="music-duration">0:00</span>
+                        </div>
+                        <div class="music-volume-row">
+                            <span>🔈</span>
+                            <input type="range" id="music-volume-slider" class="music-slider" value="70" min="0" max="100" step="1">
+                            <span>🔊</span>
+                        </div>
+                    </div>
+                    <div class="music-playlist-panel">
+                        <h4 class="playlist-heading">Playlist</h4>
+                        <div class="playlist-items" id="playlist-items">
+                            <div class="playlist-item active" data-track="0">
+                                <span class="playlist-num">01</span>
+                                <div class="playlist-info">
+                                    <span class="playlist-name">Maand (Unplugged)</span>
+                                    <span class="playlist-mood">Calm Intro • Soft Atmosphere</span>
+                                </div>
+                            </div>
+                            <div class="playlist-item" data-track="1">
+                                <span class="playlist-num">02</span>
+                                <div class="playlist-info">
+                                    <span class="playlist-name">Majboor</span>
+                                    <span class="playlist-mood">Deep Emotion • Night Vibe</span>
+                                </div>
+                            </div>
+                            <div class="playlist-item" data-track="2">
+                                <span class="playlist-num">03</span>
+                                <div class="playlist-info">
+                                    <span class="playlist-name">Mood (Lofi)</span>
+                                    <span class="playlist-mood">Chill Focus • Dashboard</span>
+                                </div>
+                            </div>
+                            <div class="playlist-item" data-track="3">
+                                <span class="playlist-num">04</span>
+                                <div class="playlist-info">
+                                    <span class="playlist-name">Shikayat</span>
+                                    <span class="playlist-mood">Introspection • Late Night</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Hidden audio element -->
+                <audio id="music-audio-element" preload="metadata"></audio>
+            </section>
+
+            <!-- ========== ABOUT / IDENTITY ZONE ========== -->
+            <section id="about" class="section about-section">
+                <div class="section-header">
+                    <h2 class="section-title">⚡ About / Identity</h2>
+                    <p class="section-subtitle">The essence behind PRIYANGSHUX8</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-card">
+                        <div class="about-icon-glow">P8</div>
+                        <h3>Who Is PRIYANGSHUX8?</h3>
+                        <p class="about-text">
+                            A digital identity forged in crimson light and endless shadow. This realm embodies
+                            the fusion of <strong>elite aesthetics</strong>, <strong>deep emotion</strong>, and
+                            <strong>unshakable confidence</strong>. Every pixel here speaks of power held in
+                            restraint — the quiet before the storm.
+                        </p>
+                        <p class="about-text">
+                            The white-haired figure with glowing red eyes is not merely an image. It is a
+                            <em>declaration</em>. A symbol of someone who walks the razor's edge between
+                            darkness and brilliance, carrying hidden depth beneath a knowing smirk.
+                        </p>
+                        <div class="about-traits">
+                            <span class="trait">Elite</span>
+                            <span class="trait">Mysterious</span>
+                            <span class="trait">Powerful</span>
+                            <span class="trait">Cinematic</span>
+                            <span class="trait">Deep</span>
+                            <span class="trait">Unbound</span>
+                            <span class="trait">Precise</span>
+                            <span class="trait">Immersive</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== HIDDEN SECRET ZONE ========== -->
+            <section id="secret" class="section secret-section">
+                <div class="section-header">
+                    <h2 class="section-title secret-title">🔴 The Hidden Realm</h2>
+                    <p class="section-subtitle">Few ever find this place</p>
+                </div>
+                <div class="secret-content">
+                    <div class="secret-card">
+                        <div class="secret-glow-ring"></div>
+                        <p class="secret-message">
+                            "Some truths are only visible in darkness.<br>
+                            The deepest oceans hold the brightest creatures.<br>
+                            You carry entire universes within your silence.<br>
+                            Guard them well — not everyone deserves to see."
+                        </p>
+                        <div class="secret-divider"></div>
+                        <p class="secret-hint">
+                            🌙 Late night introspection mode available
+                        </p>
+                        <button class="btn-primary" id="secret-mode-toggle">
+                            <span>Toggle Deep Mode</span>
+                        </button>
+                        <p class="secret-mode-indicator" id="secret-mode-indicator">Current Mode: Standard</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ========== SETTINGS ========== -->
+            <section id="settings" class="section settings-section">
+                <div class="section-header">
+                    <h2 class="section-title">⚙ Settings</h2>
+                    <p class="section-subtitle">Customize your experience</p>
+                </div>
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>🎬 Animation Intensity</h3>
+                        <p>Controls the strength of all motion effects</p>
+                        <input type="range" id="anim-intensity-slider" min="0" max="100" value="80" class="settings-slider">
+                        <span class="settings-val" id="anim-intensity-val">80%</span>
+                    </div>
+                    <div class="settings-card">
+                        <h3>✨ Glow Effects</h3>
+                        <p>Toggle red glow overlays and borders</p>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="glow-toggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-card">
+                        <h3>✨ Particle Density</h3>
+                        <p>Number of floating particles rendered</p>
+                        <input type="range" id="particle-density-slider" min="10" max="100" value="50" class="settings-slider">
+                        <span class="settings-val" id="particle-density-val">50</span>
+                    </div>
+                    <div class="settings-card">
+                        <h3>🎨 Theme Variant</h3>
+                        <p>Switch between color schemes</p>
+                        <select id="theme-select" class="settings-select">
+                            <option value="crimson">Crimson Night (Default)</option>
+                            <option value="pure-black">Pure Abyss</option>
+                            <option value="silver">Silver Shadow</option>
+                        </select>
+                    </div>
+                    <div class="settings-card">
+                        <h3>🔊 Default Volume</h3>
+                        <p>Starting volume for music player</p>
+                        <input type="range" id="default-volume-slider" min="0" max="100" value="70" class="settings-slider">
+                        <span class="settings-val" id="default-volume-val">70%</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <p class="footer-brand">PRIYANGSHUX8</p>
+            <p class="footer-tagline">This is not a website. This is a world.</p>
+            <p class="footer-copy">&copy; 2026 — Built with fire, precision, and red glow.</p>
+        </footer>
+
+    </div>
+
+    <!-- ==================== SCRIPTS (Order matters) ==================== -->
+    <script src="js/config.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/secret.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
-</html>
+                                                                                                           </html>
