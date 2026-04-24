@@ -1,0 +1,197 @@
+/* ============================================================
+   RESPONSIVE.CSS — Mobile & Tablet Breakpoints
+   PRIYANGSHUX8 | Fully Responsive Across All Devices
+   ============================================================ */
+
+/* Tablet: 768px - 1024px */
+@media (max-width: 1024px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        gap: var(--space-2xl);
+    }
+
+    .hero-image-col {
+        flex: none;
+    }
+
+    .hero-image-wrapper {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-image-glow-ring {
+        width: 330px;
+        height: 330px;
+    }
+
+    .hero-image-aura {
+        width: 380px;
+        height: 380px;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        margin: 0 auto var(--space-xl);
+    }
+
+    .hero-cta-group {
+        justify-content: center;
+    }
+
+    .hero-heading {
+        justify-content: center;
+    }
+
+    .ai-chat-container {
+        flex-direction: column;
+    }
+
+    .ai-chat-sidebar {
+        flex: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+/* Mobile: < 768px */
+@media (max-width: 768px) {
+    :root {
+        --nav-height: 60px;
+        --space-4xl: 48px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-hamburger {
+        display: flex;
+    }
+
+    .section {
+        padding: var(--space-2xl) var(--space-md);
+    }
+
+    .hero-image-wrapper {
+        width: 240px;
+        height: 240px;
+    }
+
+    .hero-image-glow-ring {
+        width: 260px;
+        height: 260px;
+    }
+
+    .hero-image-aura {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-heading {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .intro-title {
+        font-size: 2.5rem;
+        letter-spacing: 6px;
+    }
+
+    .intro-subtitle {
+        font-size: 1rem;
+        letter-spacing: 4px;
+    }
+
+    .ai-messages {
+        max-height: 350px;
+    }
+
+    .memory-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+    }
+
+    .memory-card {
+        font-size: 1rem;
+    }
+
+    .tictactoe-cell {
+        font-size: 1.5rem;
+    }
+
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .music-progress-row,
+    .music-volume-row {
+        max-width: 100%;
+    }
+
+    .quiz-category-select {
+        gap: var(--space-xs);
+    }
+
+    .quiz-cat-btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
+
+    .footer {
+        padding: var(--space-lg);
+    }
+}
+
+/* Small Mobile: < 480px */
+@media (max-width: 480px) {
+    .hero-image-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .hero-image-glow-ring {
+        width: 220px;
+        height: 220px;
+    }
+
+    .hero-image-aura {
+        width: 250px;
+        height: 250px;
+    }
+
+    .btn-primary, .btn-secondary {
+        padding: 12px 24px;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .intro-title {
+        font-size: 1.8rem;
+        letter-spacing: 4px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .playlist-item {
+        flex-direction: column;
+        text-align: center;
+    }
+}

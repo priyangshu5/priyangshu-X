@@ -1,0 +1,196 @@
+/* ============================================================
+   MAIN.CSS — Core Styles, Variables, Reset, Typography, Layout
+   PRIYANGSHUX8 | Production-Ready | Modular Architecture
+   ============================================================ */
+
+/* ----- CSS CUSTOM PROPERTIES (Design Tokens) ----- */
+:root {
+    /* Core Palette — extracted from hero image */
+    --color-deep-black: #0a0000;
+    --color-abyss: #050000;
+    --color-blood-red: #8b0000;
+    --color-crimson: #dc143c;
+    --color-crimson-bright: #ff2040;
+    --color-dark-gray: #1a1a1a;
+    --color-mid-gray: #2a2a2a;
+    --color-soft-white: #f0e6e6;
+    --color-silver: #c0c0c0;
+
+    /* Glow Effects */
+    --glow-red: 0 0 20px rgba(220, 20, 60, 0.8);
+    --glow-red-strong: 0 0 40px rgba(220, 20, 60, 1);
+    --glow-red-subtle: 0 0 10px rgba(220, 20, 60, 0.4);
+    --glow-white: 0 0 15px rgba(240, 230, 230, 0.3);
+
+    /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+    /* Spacing Scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 96px;
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-full: 50%;
+
+    /* Transitions */
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-cinematic: 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* Z-Index Layers */
+    --z-cursor: 9999;
+    --z-intro: 10000;
+    --z-nav: 1000;
+    --z-mobile-nav: 900;
+    --z-overlay: 800;
+    --z-modal: 700;
+
+    /* Layout */
+    --nav-height: 70px;
+    --max-width: 1400px;
+}
+
+/* ----- CSS RESET ----- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    background-color: var(--color-abyss);
+    color: var(--color-soft-white);
+}
+
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at center, #0d0000 0%, #050000 60%, #000000 100%);
+    cursor: none;
+}
+
+/* Show default cursor on touch devices */
+@media (pointer: coarse) {
+    body { cursor: auto; }
+    #custom-cursor { display: none; }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor: none;
+}
+
+ul { list-style: none; }
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    cursor: none;
+    font-family: var(--font-primary);
+    border: none;
+    background: none;
+}
+
+input, select {
+    font-family: var(--font-primary);
+}
+
+/* ----- TYPOGRAPHY ----- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--color-soft-white);
+    text-shadow: var(--glow-red-subtle);
+    margin-bottom: var(--space-sm);
+    letter-spacing: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-silver);
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-3xl);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+code {
+    font-family: var(--font-mono);
+    background: rgba(220, 20, 60, 0.2);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85em;
+    color: var(--color-crimson-bright);
+}
+
+/* ----- LAYOUT ----- */
+.main-content {
+    position: relative;
+    z-index: 1;
+    padding-top: var(--nav-height);
+}
+
+.section {
+    display: none;
+    min-height: 100vh;
+    padding: var(--space-4xl) var(--space-xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity var(--transition-cinematic), transform var(--transition-cinematic);
+}
+
+.section.active-section {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ----- SCROLLBAR ----- */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--color-abyss);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--color-blood-red);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-crimson);
+}

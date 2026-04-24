@@ -1,0 +1,228 @@
+/* ============================================================
+   HERO.CSS — Hero Section, Image Effects, Aura, Smoke, Glow
+   PRIYANGSHUX8 | Legendary Hero Presentation
+   ============================================================ */
+
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-4xl);
+    max-width: 1200px;
+    width: 100%;
+    padding: var(--space-2xl);
+}
+
+/* ----- HERO IMAGE WRAPPER ----- */
+.hero-image-col {
+    flex: 0 0 45%;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    position: relative;
+    z-index: 2;
+    animation: breathe 6s ease-in-out infinite;
+    box-shadow: 0 0 60px rgba(220, 20, 60, 0.3), 0 20px 60px rgba(0,0,0,0.5);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.hero-image:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 100px rgba(220, 20, 60, 0.6), 0 30px 80px rgba(0,0,0,0.7);
+}
+
+/* Glow ring behind image */
+.hero-image-glow-ring {
+    position: absolute;
+    width: 430px;
+    height: 430px;
+    border-radius: var(--radius-full);
+    border: 2px solid rgba(220, 20, 60, 0.3);
+    z-index: 1;
+    animation: spinSlow 20s linear infinite, glowPulse 3s ease-in-out infinite;
+}
+
+/* Aura energy */
+.hero-image-aura {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: var(--radius-full);
+    background: radial-gradient(circle, rgba(220,20,60,0.15) 0%, transparent 70%);
+    z-index: 0;
+    animation: breathe 4s ease-in-out infinite;
+}
+
+/* Smoke effects */
+.hero-image-smoke {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background: radial-gradient(ellipse, rgba(100,100,100,0.2) 0%, transparent 70%);
+    z-index: 0;
+    bottom: -20px;
+    left: 20%;
+    animation: floatSlow 8s ease-in-out infinite;
+    filter: blur(20px);
+}
+
+.hero-image-smoke.secondary {
+    bottom: -30px;
+    left: 50%;
+    animation-delay: 4s;
+    width: 150px;
+    height: 80px;
+}
+
+/* Border pulse */
+.hero-image-border-pulse {
+    position: absolute;
+    inset: -8px;
+    border-radius: var(--radius-xl);
+    border: 1px solid transparent;
+    z-index: 3;
+    pointer-events: none;
+    animation: borderGlow 2.5s ease-in-out infinite;
+}
+
+/* Eye glows */
+.hero-eye-glow-left,
+.hero-eye-glow-right {
+    position: absolute;
+    width: 20px;
+    height: 10px;
+    background: var(--color-crimson-bright);
+    border-radius: 50%;
+    z-index: 4;
+    filter: blur(6px);
+    animation: glowPulseSoft 2s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.hero-eye-glow-left {
+    top: 28%;
+    left: 35%;
+}
+
+.hero-eye-glow-right {
+    top: 28%;
+    right: 35%;
+    animation-delay: 0.5s;
+}
+
+/* ----- HERO TEXT ----- */
+.hero-text-col {
+    flex: 1;
+}
+
+.hero-heading {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: var(--color-soft-white);
+    margin-bottom: var(--space-md);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+
+.hero-heading-letter {
+    display: inline-block;
+    animation: float 3s ease-in-out infinite;
+    text-shadow: var(--glow-red);
+}
+
+.hero-heading-letter:nth-child(1) { animation-delay: 0s; }
+.hero-heading-letter:nth-child(2) { animation-delay: 0.1s; }
+.hero-heading-letter:nth-child(3) { animation-delay: 0.2s; }
+.hero-heading-letter:nth-child(4) { animation-delay: 0.3s; }
+.hero-heading-letter:nth-child(5) { animation-delay: 0.4s; }
+.hero-heading-letter:nth-child(6) { animation-delay: 0.5s; }
+.hero-heading-letter:nth-child(7) { animation-delay: 0.6s; }
+.hero-heading-letter:nth-child(8) { animation-delay: 0.7s; }
+.hero-heading-letter:nth-child(9) { animation-delay: 0.8s; }
+.hero-heading-letter:nth-child(10) { animation-delay: 0.9s; }
+.hero-heading-letter:nth-child(11) { animation-delay: 1.0s; }
+
+.hero-tagline {
+    font-size: 1.3rem;
+    color: var(--color-crimson);
+    letter-spacing: 4px;
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+}
+
+.hero-description {
+    font-size: 1.05rem;
+    color: var(--color-silver);
+    line-height: 1.8;
+    margin-bottom: var(--space-xl);
+    max-width: 500px;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+/* Hero scroll indicator */
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-silver);
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    animation: fadeInUp 1s ease-out 1.5s both;
+    z-index: 2;
+}
+
+.scroll-arrow {
+    width: 24px;
+    height: 24px;
+    border-right: 2px solid var(--color-crimson);
+    border-bottom: 2px solid var(--color-crimson);
+    transform: rotate(45deg);
+    animation: float 2s ease-in-out infinite;
+}
